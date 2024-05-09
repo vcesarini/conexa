@@ -113,9 +113,10 @@ const ProductTable = () => {
           <Row className='d-flex justify-content-center mb-5'>
             <Col>
               <h3>Sección 1</h3>
+              <div className="d-flex flex-wrap">
               {products.map(product => (
-                <Card key={product.id} style={{ width:'14rem', margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} style={{ width: '10px', height:'auto' }}/>
+                <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
+                  <Card.Img variant="top" src={product.image} style={{ width: '100%', height:'auto' }}/>
                   <Card.Body>
                     <Form.Check
                       type="checkbox"
@@ -142,12 +143,14 @@ const ProductTable = () => {
                   </Card.Body>
                 </Card>
               ))}
+              </div>
             </Col>
             <Col>
               <h3>Sección 2</h3>
+              <div className="d-flex flex-wrap">
               {products.map(product => (
-                <Card key={product.id} style={{ margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} style={{ width: '10px', height:'auto' }}/>
+                <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
+                  <Card.Img variant="top" src={product.image} style={{ width: '100%', height:'auto' }}/>
                   <Card.Body>
                     <Form.Check
                       type="checkbox"
@@ -163,6 +166,7 @@ const ProductTable = () => {
                   </Card.Body>
                 </Card>
               ))}
+              </div>
               <h3>Episodios Sección 2</h3>
               {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection2.map(episode => (
                 <Card key={episode.id} style={{ margin:'4px' }}>
