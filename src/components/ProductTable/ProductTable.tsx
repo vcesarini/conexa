@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Character } from "../../types/Characters";
 import { Episode } from "../../types/Episodes";
 import { ProductService } from "../../services/ProductService";
-import { Card, Col, Container, Form, Row, Alert } from "react-bootstrap";
+import { Card, Col, Container, Form, Row, Alert, Toast, ToastContainer } from "react-bootstrap";
 import Pagination from "../Paginador/Pagination";
 
 const ProductTable = () => {
@@ -88,6 +88,13 @@ const ProductTable = () => {
       setNoSharedEpisodes(sharedEpisodes.length === 0);
     };
 
+    /* TOAST */
+    const [showA, setShowA] = useState(true);
+    const toggleShowA = () => setShowA(!showA);
+
+    const [showB, setShowB] = useState(true);
+    const toggleShowB = () => setShowB(!showB);
+ 
     return (
       <>
         <Container>
@@ -172,13 +179,33 @@ const ProductTable = () => {
               ))}
             </Col>
           </Row>
-          {duplicateCharacterError && <Alert variant="danger">No puedes seleccionar dos personajes iguales.</Alert>}
+          {duplicateCharacterError && 
+            <ToastContainer
+            className="p-3"
+            position="bottom-end"
+            style={{ zIndex: 1 }}
+            >
+              <Toast show={showA} onClose={toggleShowA}>
+              <Toast.Header>
+                <strong className="me-auto">¡no se puede elegir 2 iguales!</strong>
+              </Toast.Header>
+              <Toast.Body>probá con otro ;)</Toast.Body>
+              </Toast>
+            </ToastContainer>
+          }
           {noSharedEpisodes && (
-            <Row>
-              <Col>
-                <Alert variant="warning">No hay episodios compartidos entre los personajes seleccionados.</Alert>
-              </Col>
-            </Row>
+            <ToastContainer
+            className="p-3"
+            position="bottom-end"
+            style={{ zIndex: 1 }}
+            >
+              <Toast show={showB} onClose={toggleShowB}>
+              <Toast.Header>
+                <strong className="me-auto">no comparten episodios</strong>
+              </Toast.Header>
+              <Toast.Body>que lastima :(</Toast.Body>
+              </Toast>
+            </ToastContainer>
           )}
           <Pagination
             totalPages={totalPages}
