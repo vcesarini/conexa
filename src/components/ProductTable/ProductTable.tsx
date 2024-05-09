@@ -43,6 +43,12 @@ const ProductTable = () => {
     }, [page]);
 
     const handleSelectSection1 = async (character: Character) => {
+      if (character === selectedCharacterSection1) {
+        setSelectedCharacterSection1(null);
+        setEpisodesSection1([]);
+        return;
+      }
+
       if (character === selectedCharacterSection2) {
         setDuplicateCharacterError(true);
         return;
@@ -60,6 +66,12 @@ const ProductTable = () => {
     };  
     
     const handleSelectSection2 = async (character: Character) => {
+      if (character === selectedCharacterSection2) {
+        setSelectedCharacterSection2(null);
+        setEpisodesSection2([]);
+        return;
+      }
+
       if (character === selectedCharacterSection1) {
         setDuplicateCharacterError(true);
         return;
@@ -106,7 +118,7 @@ const ProductTable = () => {
                   <Card.Img variant="top" src={product.image} style={{ width: '10px', height:'auto' }}/>
                   <Card.Body>
                     <Form.Check
-                      type="radio"
+                      type="checkbox"
                       label={`${product.name}`}
                       name="section1"
                       checked={selectedCharacterSection1 === product}
@@ -138,7 +150,7 @@ const ProductTable = () => {
                   <Card.Img variant="top" src={product.image} style={{ width: '10px', height:'auto' }}/>
                   <Card.Body>
                     <Form.Check
-                      type="radio"
+                      type="checkbox"
                       label={`${product.name}`}
                       name="section2"
                       checked={selectedCharacterSection2 === product}
@@ -167,7 +179,7 @@ const ProductTable = () => {
           <Row>
             <Col>
               <h3>Episodios Compartidos</h3>
-              {episodesShared.map(episode => (
+              {selectedCharacterSection1 && selectedCharacterSection2 && episodesShared.map(episode => (
                 <Card key={episode.id} style={{ margin:'4px' }}>
                   <Card.Body>
                     <Card.Title>{episode.name}</Card.Title>
