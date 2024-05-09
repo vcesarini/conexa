@@ -102,8 +102,8 @@ const ProductTable = () => {
             <Col>
               <h3>Sección 1</h3>
               {products.map(product => (
-                <Card key={product.id} style={{ margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} style={{ width: '30px', height:'auto' }}/>
+                <Card key={product.id} style={{ width:'14rem', margin:'4px' }}>
+                  <Card.Img variant="top" src={product.image} style={{ width: '100%', height:'auto' }}/>
                   <Card.Body>
                     <Form.Check
                       type="radio"
@@ -179,6 +179,7 @@ const ProductTable = () => {
               ))}
             </Col>
           </Row>
+          
           {duplicateCharacterError && 
             <ToastContainer
             className="p-3"
