@@ -103,7 +103,7 @@ const ProductTable = () => {
               <h3>Sección 1</h3>
               {products.map(product => (
                 <Card key={product.id} style={{ width:'14rem', margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} style={{ width: '100%', height:'auto' }}/>
+                  <Card.Img variant="top" src={product.image} style={{ width: '10px', height:'auto' }}/>
                   <Card.Body>
                     <Form.Check
                       type="radio"
@@ -120,7 +120,7 @@ const ProductTable = () => {
                 </Card>
               ))}
               <h3>Episodios Sección 1</h3>
-              {episodesSection1.map(episode => (
+              {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection1.map(episode => (
                 <Card key={episode.id} style={{ margin:'4px' }}>
                   <Card.Body>
                     <Card.Title>{episode.name}</Card.Title>
@@ -135,7 +135,7 @@ const ProductTable = () => {
               <h3>Sección 2</h3>
               {products.map(product => (
                 <Card key={product.id} style={{ margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} style={{ width: '30px', height:'auto' }}/>
+                  <Card.Img variant="top" src={product.image} style={{ width: '10px', height:'auto' }}/>
                   <Card.Body>
                     <Form.Check
                       type="radio"
@@ -152,7 +152,7 @@ const ProductTable = () => {
                 </Card>
               ))}
               <h3>Episodios Sección 2</h3>
-              {episodesSection2.map(episode => (
+              {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection2.map(episode => (
                 <Card key={episode.id} style={{ margin:'4px' }}>
                   <Card.Body>
                     <Card.Title>{episode.name}</Card.Title>
@@ -179,7 +179,7 @@ const ProductTable = () => {
               ))}
             </Col>
           </Row>
-          
+
           {duplicateCharacterError && 
             <ToastContainer
             className="p-3"
