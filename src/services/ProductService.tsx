@@ -1,4 +1,5 @@
 import { Character } from "../types/Characters";
+import { Episode } from "../types/Episodes";
 
 const BASE_URL = 'https://rickandmortyapi.com/api'
 
@@ -8,13 +9,11 @@ const BASE_URL = 'https://rickandmortyapi.com/api'
 //         const data = await response.json();
 //         return data.results;
 //         },
-//     // getProduct: async (id: number): Promise<ProductDetail> => {
-//     //     const response = await fetch(`${BASE_URL}/character/results/${id}`);
-//     //     const data = await response.json();
-//     //     console.log(response,'vaalxxxxe')
-
-//     //     return data;
-//     //     },
+//     getProduct: async (id: number): Promise<ProductDetail> => {
+//          const response = await fetch(`${BASE_URL}/character/results/${id}`);
+//          const data = await response.json();
+//          return data;
+//          },
 // };
 export const ProductService = {
     getProducts: async (page: number): Promise<{ characters: Character[]; pageInfo: { count: number; pages: number; next: string | null; prev: string | null; } }> => {
@@ -29,5 +28,15 @@ export const ProductService = {
                 prev: data.info.prev
             }
         };
+    },
+
+    getEpisodes: async (episodeUrls: string[]): Promise<Episode[]> => {
+        const episodes: Episode[] = [];
+        for (const url of episodeUrls) {
+            const response = await fetch(url);
+            const data = await response.json();
+            episodes.push(data);
+        }
+        return episodes;
     },
 };
