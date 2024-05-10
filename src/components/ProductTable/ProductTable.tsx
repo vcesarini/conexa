@@ -157,6 +157,7 @@ const ProductTable: React.FC = () => {
                       {product.species === 'Alien' && (<span>👽 {product.species}</span>)}
                       {product.species === 'Human' && product.gender === 'Female' && (<span>🚺 {product.species}</span>)}
                       {product.species === 'Human' && product.gender === 'Male' && (<span>🚹 {product.species}</span>)}
+                      {product.species !== 'Alien' && product.species !== 'Human' && (<span>🚀 {product.species}</span>)}
                     </div>
                   </Card.Footer>
                 </Card>
@@ -190,6 +191,7 @@ const ProductTable: React.FC = () => {
                       {product.species === 'Alien' && (<span>👽 {product.species}</span>)}
                       {product.species === 'Human' && product.gender === 'Female' && (<span>🚺 {product.species}</span>)}
                       {product.species === 'Human' && product.gender === 'Male' && (<span>🚹 {product.species}</span>)}
+                      {product.species !== 'Alien' && product.species !== 'Human' && (<span>🚀 {product.species}</span>)}
                     </div>
                   </Card.Footer>
                 </Card>
