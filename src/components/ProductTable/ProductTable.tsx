@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Character } from "../../types/Characters";
 import { Episode } from "../../types/Episodes";
 import { ProductService } from "../../services/ProductService";
-import { Card, Col, Container, Form, Row, Alert, Toast, ToastContainer } from "react-bootstrap";
+import { Card, Col, Container, Form, Row, Alert, Toast, ToastContainer, ListGroup } from "react-bootstrap";
 import Pagination from "../Paginador/Pagination";
+import './productTable.css';
 
 const ProductTable = () => {
     const [products, setProducts] = useState<Character[]>([]);
@@ -112,89 +113,92 @@ const ProductTable = () => {
         <Container>
           <Row className='d-flex justify-content-center mb-5'>
             <Col>
-              <h3>Sección 1</h3>
+              <h3>Character #1</h3>
               <div className="d-flex flex-wrap">
               {products.map(product => (
                 <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} style={{ width: '100%', height:'auto' }}/>
+                  <Card.Img variant="top" src={product.image} className="ImgProduct"/>
                   <Card.Body>
                     <Form.Check
                       type="checkbox"
                       label={`${product.name}`}
                       name="section1"
+                      className="FontCheck"
                       checked={selectedCharacterSection1 === product}
                       onChange={() => handleSelectSection1(product)}
                     />
-                    <Card.Title>{product.id} - {product.name}</Card.Title>
-                    <Card.Text>
-                      {product.status} - {product.species}
-                    </Card.Text>
                   </Card.Body>
-                </Card>
-              ))}
-              <h3>Episodios Sección 1</h3>
-              {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection1.map(episode => (
-                <Card key={episode.id} style={{ margin:'4px' }}>
-                  <Card.Body>
-                    <Card.Title>{episode.name}</Card.Title>
-                    <Card.Text>
-                      {episode.episode} - {episode.air_date}
-                    </Card.Text>
-                  </Card.Body>
+                  <Card.Footer>
+                    <small className="FontCard">{product.status}<br/>{product.species}</small>
+                  </Card.Footer>
                 </Card>
               ))}
               </div>
             </Col>
             <Col>
-              <h3>Sección 2</h3>
+              <h3>Character #2</h3>
               <div className="d-flex flex-wrap">
               {products.map(product => (
                 <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} style={{ width: '100%', height:'auto' }}/>
+                  <Card.Img variant="top" src={product.image} className="ImgProduct"/>
                   <Card.Body>
                     <Form.Check
                       type="checkbox"
                       label={`${product.name}`}
                       name="section2"
+                      className="FontCheck"
                       checked={selectedCharacterSection2 === product}
                       onChange={() => handleSelectSection2(product)}
                     />
-                    <Card.Title>{product.id} - {product.name}</Card.Title>
-                    <Card.Text>
-                      {product.status} - {product.species}
-                    </Card.Text>
                   </Card.Body>
+                  <Card.Footer>
+                    <small className="FontCard">{product.status}<br/>{product.species}</small>
+                  </Card.Footer>
                 </Card>
               ))}
               </div>
-              <h3>Episodios Sección 2</h3>
-              {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection2.map(episode => (
-                <Card key={episode.id} style={{ margin:'4px' }}>
-                  <Card.Body>
-                    <Card.Title>{episode.name}</Card.Title>
-                    <Card.Text>
-                      {episode.episode} - {episode.air_date}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              ))}
             </Col>
           </Row>
+          <hr></hr>
           <Row>
             <Col>
-              <h3>Episodios Compartidos</h3>
-              {selectedCharacterSection1 && selectedCharacterSection2 && episodesShared.map(episode => (
-                <Card key={episode.id} style={{ margin:'4px' }}>
-                  <Card.Body>
-                    <Card.Title>{episode.name}</Card.Title>
-                    <Card.Text>
-                      {episode.episode} - {episode.air_date}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
+            <h4>Episodios del Character #1</h4>
+              {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection1.map(episode => (
+              <ListGroup key={episode.id} style={{ marginBottom:'4px' }}>
+                <ListGroup.Item><strong>{episode.name}:</strong> {episode.episode} | {episode.air_date}</ListGroup.Item>
+              </ListGroup>
               ))}
             </Col>
+            <Col>
+            <h4>Episodios del Character #2</h4>
+              {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection2.map(episode => (
+                <ListGroup key={episode.id} style={{ marginBottom:'4px' }}>
+                  <ListGroup.Item><strong>{episode.name}:</strong> {episode.episode} | {episode.air_date}</ListGroup.Item>
+                </ListGroup>
+              ))}
+              </Col>
           </Row>
+          <hr></hr>
+          <Row>
+            <Col>
+              <h4>Episodios compartidos de los Characters</h4>
+              <div className="d-flex flex-wrap justify-content-center">
+              {selectedCharacterSection1 && selectedCharacterSection2 && episodesShared.map(episode => (
+                <ListGroup key={episode.id} style={{ width:'12rem', margin:'4px' }}>
+                  <ListGroup.Item style={{ height: '140px' }}><strong>{episode.name}:</strong> {episode.episode}<br/>{episode.air_date}</ListGroup.Item>
+                </ListGroup>
+              ))}
+              </div>
+            </Col>
+          </Row>
+         
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            handlePrevPage={handlePrevPage}
+            handleNextPage={handleNextPage}
+          />
+        </Container>
 
           {duplicateCharacterError && 
             <ToastContainer
@@ -224,13 +228,6 @@ const ProductTable = () => {
               </Toast>
             </ToastContainer>
           )}
-          <Pagination
-            totalPages={totalPages}
-            currentPage={page}
-            handlePrevPage={handlePrevPage}
-            handleNextPage={handleNextPage}
-          />
-        </Container>
       </>
     )
 }

@@ -1,18 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+body {
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
+  background-color: rgb(8, 2, 22);
+  color: aliceblue;
+}
 .ImgProduct {
-    height: 200px;
-    object-fit: contain;
+    height: 100px;
+    object-fit: cover;
+}
+.FontCheck {
+  font-weight: 700;
+  font-size: 14px;
 }
 
-.ellipsis {
-    text-overflow: ellipsis; /* enables ellipsis */
-    white-space: nowrap; /* keeps the text in a single line */
-    overflow: hidden; /* keeps the element from overflowing its parent */
-  }
+.FontCard {
+  font-weight: 400;
+  font-size: 12px;
+}
 
-.multiline-ellipsis {
-overflow: hidden;
-display: -webkit-box;
--webkit-box-orient: vertical;
--webkit-line-clamp: 3; /* start showing ellipsis when 3rd line is reached */
-white-space: pre-wrap; /* let the text wrap preserving spaces */
+.card-body {
+  padding: 6px 0 0 10px;
+  background-color: #9da9ff;
 }
