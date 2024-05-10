@@ -182,52 +182,44 @@ const ProductTable = () => {
           <Row>
             <Col>
               <h4>Episodios compartidos de los Characters</h4>
-              <div className="d-flex flex-wrap justify-content-center">
+              <div className="d-flex flex-wrap">
               {selectedCharacterSection1 && selectedCharacterSection2 && episodesShared.map(episode => (
                 <ListGroup key={episode.id} style={{ width:'12rem', margin:'4px' }}>
                   <ListGroup.Item style={{ height: '140px' }}><strong>{episode.name}:</strong> {episode.episode}<br/>{episode.air_date}</ListGroup.Item>
                 </ListGroup>
               ))}
+              {selectedCharacterSection1 && selectedCharacterSection2 && noSharedEpisodes && (
+                <Alert variant="warning">
+                  <strong>Qué lástima!</strong> estos Characters no comparten episodios. Selecconá otro porfa ;)
+                </Alert>
+              )}
               </div>
             </Col>
           </Row>
-         
-          <Pagination
-            totalPages={totalPages}
-            currentPage={page}
-            handlePrevPage={handlePrevPage}
-            handleNextPage={handleNextPage}
-          />
         </Container>
+          <div className="flex-wrap mt-5">
+            <Pagination
+              totalPages={totalPages}
+              currentPage={page}
+              handlePrevPage={handlePrevPage}
+              handleNextPage={handleNextPage}
+            />
+          </div>
 
           {duplicateCharacterError && 
             <ToastContainer
             className="p-3"
-            position="bottom-end"
+            position="top-center"
             style={{ zIndex: 1 }}
             >
               <Toast show={showA} onClose={toggleShowA}>
               <Toast.Header>
                 <strong className="me-auto">¡no se puede elegir 2 iguales!</strong>
               </Toast.Header>
-              <Toast.Body>probá con otro ;)</Toast.Body>
+              <Toast.Body style={{ backgroundColor: 'blueviolet' }}>probá con otro ;)</Toast.Body>
               </Toast>
             </ToastContainer>
           }
-          {noSharedEpisodes && (
-            <ToastContainer
-            className="p-3"
-            position="bottom-end"
-            style={{ zIndex: 1 }}
-            >
-              <Toast show={showB} onClose={toggleShowB}>
-              <Toast.Header>
-                <strong className="me-auto">no comparten episodios</strong>
-              </Toast.Header>
-              <Toast.Body>que lastima :(</Toast.Body>
-              </Toast>
-            </ToastContainer>
-          )}
       </>
     )
 }
