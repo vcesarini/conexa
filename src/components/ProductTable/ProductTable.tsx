@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { Character } from "../../types/Characters";
 import { Episode } from "../../types/Episodes";
 import { ProductService } from "../../services/ProductService";
-import { Card, Col, Container, Form, Row, Alert, Toast, ToastContainer, ListGroup } from "react-bootstrap";
+import { Card, Col, Container, Form, Row, Alert, ListGroup } from "react-bootstrap";
 import Pagination from "../Paginador/Pagination";
 import './productTable.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductTable = () => {
     const [products, setProducts] = useState<Character[]>([]);
@@ -17,7 +19,6 @@ const ProductTable = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [noSharedEpisodes, setNoSharedEpisodes] = useState(false);
     const [duplicateCharacterError, setDuplicateCharacterError] = useState(false);
-    const toastRef = useRef<HTMLDivElement>(null); // Referencia al elemento del Toast
     const resultsRef = useRef<HTMLDivElement>(null);
 
     const handlePrevPage = () => {
@@ -54,7 +55,7 @@ const ProductTable = () => {
 
       if (character === selectedCharacterSection2) {
         setDuplicateCharacterError(true);
-        scrollToTop();
+        notify();
         return;
       }
     
@@ -79,7 +80,7 @@ const ProductTable = () => {
 
       if (character === selectedCharacterSection1) {
         setDuplicateCharacterError(true);
-        scrollToTop();
+        notify();
         return;
       }
     
@@ -113,12 +114,17 @@ const ProductTable = () => {
       }
     };
 
-    /* TOAST */
-    const scrollToTop = () => {
-      if (toastRef.current) {
-        toastRef.current.scrollIntoView({ behavior: "smooth" });
-      }
-    };
+    const notify = () => 
+      toast.warn('¡no se puede elegir 2 iguales! probá con otro', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
 
     return (
       <>
@@ -221,19 +227,7 @@ const ProductTable = () => {
           </div>
 
           {duplicateCharacterError &&
-            <ToastContainer
-            className="p-3"
-            position="top-center"
-            style={{ zIndex: 1 }}
-            ref={toastRef}
-            >
-              <Toast show={true} onClose={() => setDuplicateCharacterError(false)}>
-              <Toast.Header>
-                <strong className="me-auto">¡no se puede elegir 2 iguales!</strong>
-              </Toast.Header>
-              <Toast.Body style={{ backgroundColor: 'blueviolet' }}>probá con otro ;)</Toast.Body>
-              </Toast>
-            </ToastContainer>
+            <ToastContainer/>
           }
       </>
     )
