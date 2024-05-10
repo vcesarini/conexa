@@ -237,7 +237,7 @@ const ProductTable: React.FC = () => {
             </Col>
           </Row>
         </Container>
-          <div className="flex-wrap mt-5">
+          <div className="flex-wrap my-5">
             <Pagination
               totalPages={totalPages}
               currentPage={page}
@@ -249,6 +249,8 @@ const ProductTable: React.FC = () => {
           {duplicateCharacterError &&
             <ToastContainer/>
           }
+
+          <div><p style={{ fontSize: '12px'}}>🌈 Realizado por Vale C</p></div>
       </>
     )
 }
