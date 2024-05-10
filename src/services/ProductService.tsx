@@ -3,18 +3,6 @@ import { Episode } from "../types/Episodes";
 
 const BASE_URL = 'https://rickandmortyapi.com/api'
 
-// export const ProductService = {
-//     getProducts: async (): Promise<Character[]> => {
-//         const response = await fetch(`${BASE_URL}/character/`);
-//         const data = await response.json();
-//         return data.results;
-//         },
-//     getProduct: async (id: number): Promise<ProductDetail> => {
-//          const response = await fetch(`${BASE_URL}/character/results/${id}`);
-//          const data = await response.json();
-//          return data;
-//          },
-// };
 export const ProductService = {
     getProducts: async (page: number): Promise<{ characters: Character[]; pageInfo: { count: number; pages: number; next: string | null; prev: string | null; } }> => {
         const response = await fetch(`${BASE_URL}/character/?page=${page}`);
