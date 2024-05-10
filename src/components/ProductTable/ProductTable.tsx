@@ -126,6 +126,7 @@ const ProductTable = () => {
           <Row className='d-flex justify-content-center mb-5'>
             <Col>
               <h3>Character #1</h3>
+              <h6>Seleccioná un pesonaje</h6>
               <div className="d-flex flex-wrap">
               {products.map(product => (
                 <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
@@ -149,6 +150,7 @@ const ProductTable = () => {
             </Col>
             <Col>
               <h3>Character #2</h3>
+              <h6>Seleccioná un pesonaje</h6>
               <div className="d-flex flex-wrap">
               {products.map(product => (
                 <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
@@ -218,13 +220,14 @@ const ProductTable = () => {
             />
           </div>
 
-          {duplicateCharacterError && 
+          {duplicateCharacterError &&
             <ToastContainer
             className="p-3"
-            position="middle-center"
+            position="top-center"
             style={{ zIndex: 1 }}
+            ref={toastRef}
             >
-              <Toast show={true} onClose={() => setDuplicateCharacterError(false)} ref={toastRef}>
+              <Toast show={true} onClose={() => setDuplicateCharacterError(false)}>
               <Toast.Header>
                 <strong className="me-auto">¡no se puede elegir 2 iguales!</strong>
               </Toast.Header>
