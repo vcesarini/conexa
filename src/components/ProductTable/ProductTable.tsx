@@ -8,17 +8,17 @@ import './productTable.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const ProductTable = () => {
+const ProductTable: React.FC = () => {
     const [products, setProducts] = useState<Character[]>([]);
     const [selectedCharacterSection1, setSelectedCharacterSection1] = useState<Character | null>(null);
     const [selectedCharacterSection2, setSelectedCharacterSection2] = useState<Character | null>(null);
     const [episodesSection1, setEpisodesSection1] = useState<Episode[]>([]);
     const [episodesSection2, setEpisodesSection2] = useState<Episode[]>([]);
     const [episodesShared, setEpisodesShared] = useState<Episode[]>([]);
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [noSharedEpisodes, setNoSharedEpisodes] = useState(false);
-    const [duplicateCharacterError, setDuplicateCharacterError] = useState(false);
+    const [page, setPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+    const [noSharedEpisodes, setNoSharedEpisodes] = useState<boolean>(false);
+    const [duplicateCharacterError, setDuplicateCharacterError] = useState<boolean>(false);
     const resultsRef = useRef<HTMLDivElement>(null);
 
     const handlePrevPage = () => {
