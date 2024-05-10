@@ -148,7 +148,16 @@ const ProductTable = () => {
                     />
                   </Card.Body>
                   <Card.Footer>
-                    <small className="FontCard">{product.status}<br/>{product.species}</small>
+                    <div className="FontCard">
+                      {product.status === 'Alive' && (<span>🌟 {product.status}</span>)}
+                      {product.status === 'Dead' && (<span>💀 {product.status}</span>)}
+                      {product.status === 'unknown' && (<span>🤔 {product.status}</span>)}
+                    </div>
+                    <div className="FontCard">
+                      {product.species === 'Alien' && (<span>👽 {product.species}</span>)}
+                      {product.species === 'Human' && product.gender === 'Female' && (<span>🚺 {product.species}</span>)}
+                      {product.species === 'Human' && product.gender === 'Male' && (<span>🚹 {product.species}</span>)}
+                    </div>
                   </Card.Footer>
                 </Card>
               ))}
@@ -172,7 +181,16 @@ const ProductTable = () => {
                     />
                   </Card.Body>
                   <Card.Footer>
-                    <small className="FontCard">{product.status}<br/>{product.species}</small>
+                    <div className="FontCard">
+                      {product.status === 'Alive' && (<span>🌟 {product.status}</span>)}
+                      {product.status === 'Dead' && (<span>💀 {product.status}</span>)}
+                      {product.status === 'unknown' && (<span>🤔 {product.status}</span>)}
+                    </div>
+                    <div className="FontCard">
+                      {product.species === 'Alien' && (<span>👽 {product.species}</span>)}
+                      {product.species === 'Human' && product.gender === 'Female' && (<span>🚺 {product.species}</span>)}
+                      {product.species === 'Human' && product.gender === 'Male' && (<span>🚹 {product.species}</span>)}
+                    </div>
                   </Card.Footer>
                 </Card>
               ))}
