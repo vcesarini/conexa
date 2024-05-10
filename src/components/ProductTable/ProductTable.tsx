@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Character } from "../../types/Characters";
 import { Episode } from "../../types/Episodes";
 import { ProductService } from "../../services/ProductService";
@@ -17,6 +17,8 @@ const ProductTable = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [noSharedEpisodes, setNoSharedEpisodes] = useState(false);
     const [duplicateCharacterError, setDuplicateCharacterError] = useState(false);
+    const toastRef = useRef<HTMLDivElement>(null); // Referencia al elemento del Toast
+    const resultsRef = useRef<HTMLDivElement>(null);
 
     const handlePrevPage = () => {
       setPage((prevPage) => prevPage - 1);
@@ -52,6 +54,7 @@ const ProductTable = () => {
 
       if (character === selectedCharacterSection2) {
         setDuplicateCharacterError(true);
+        scrollToTop();
         return;
       }
     
@@ -63,6 +66,7 @@ const ProductTable = () => {
     
       if (selectedCharacterSection2) {
         findSharedEpisodes(character, selectedCharacterSection2);
+        scrollToResults();
       }
     };  
     
@@ -75,6 +79,7 @@ const ProductTable = () => {
 
       if (character === selectedCharacterSection1) {
         setDuplicateCharacterError(true);
+        scrollToTop();
         return;
       }
     
@@ -86,6 +91,7 @@ const ProductTable = () => {
     
       if (selectedCharacterSection1) {
         findSharedEpisodes(selectedCharacterSection1, character);
+        scrollToResults();
       }
     };    
 
@@ -101,13 +107,19 @@ const ProductTable = () => {
       setNoSharedEpisodes(sharedEpisodes.length === 0);
     };
 
-    /* TOAST */
-    const [showA, setShowA] = useState(true);
-    const toggleShowA = () => setShowA(!showA);
+    const scrollToResults = () => {
+      if (resultsRef.current) {
+        resultsRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    };
 
-    const [showB, setShowB] = useState(true);
-    const toggleShowB = () => setShowB(!showB);
- 
+    /* TOAST */
+    const scrollToTop = () => {
+      if (toastRef.current) {
+        toastRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+
     return (
       <>
         <Container>
@@ -160,7 +172,7 @@ const ProductTable = () => {
             </Col>
           </Row>
           <hr></hr>
-          <Row>
+          <Row ref={resultsRef}>
             <Col>
             <h4>Episodios del Character #1</h4>
               {selectedCharacterSection1 && selectedCharacterSection2 && episodesSection1.map(episode => (
@@ -209,10 +221,10 @@ const ProductTable = () => {
           {duplicateCharacterError && 
             <ToastContainer
             className="p-3"
-            position="top-center"
+            position="middle-center"
             style={{ zIndex: 1 }}
             >
-              <Toast show={showA} onClose={toggleShowA}>
+              <Toast show={true} onClose={() => setDuplicateCharacterError(false)} ref={toastRef}>
               <Toast.Header>
                 <strong className="me-auto">¡no se puede elegir 2 iguales!</strong>
               </Toast.Header>
