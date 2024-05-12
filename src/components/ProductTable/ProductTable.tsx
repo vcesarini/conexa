@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Character } from "../../types/Characters";
+import CharacterCard from "../CharacterCard/CharacterCard";
 import { Episode } from "../../types/Episodes";
 import { ProductService } from "../../services/ProductService";
 import { Card, Col, Container, Form, Row, Alert, ListGroup } from "react-bootstrap";
@@ -134,68 +135,28 @@ const ProductTable: React.FC = () => {
               <h3>Character #1</h3>
               <h6>Seleccioná un pesonaje</h6>
               <div className="d-flex flex-wrap">
-              {products.map(product => (
-                <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} className="ImgProduct"/>
-                  <Card.Body>
-                    <Form.Check
-                      type="checkbox"
-                      label={`${product.name}`}
-                      name="section1"
-                      className="FontCheck"
-                      checked={selectedCharacterSection1 === product}
-                      onChange={() => handleSelectSection1(product)}
-                    />
-                  </Card.Body>
-                  <Card.Footer>
-                    <div className="FontCard">
-                      {product.status === 'Alive' && (<span>🌟 {product.status}</span>)}
-                      {product.status === 'Dead' && (<span>💀 {product.status}</span>)}
-                      {product.status === 'unknown' && (<span>🤔 {product.status}</span>)}
-                    </div>
-                    <div className="FontCard">
-                      {product.species === 'Alien' && (<span>👽 {product.species}</span>)}
-                      {product.species === 'Human' && product.gender === 'Female' && (<span>🚺 {product.species}</span>)}
-                      {product.species === 'Human' && product.gender === 'Male' && (<span>🚹 {product.species}</span>)}
-                      {product.species !== 'Alien' && product.species !== 'Human' && (<span>🚀 {product.species}</span>)}
-                    </div>
-                  </Card.Footer>
-                </Card>
-              ))}
+                {products.map(product => (
+                  <CharacterCard
+                    key={product.id}
+                    character={product}
+                    selectedCharacter={selectedCharacterSection1}
+                    onSelect={handleSelectSection1}
+                  />
+                ))}
               </div>
             </Col>
             <Col>
               <h3>Character #2</h3>
               <h6>Seleccioná un pesonaje</h6>
               <div className="d-flex flex-wrap">
-              {products.map(product => (
-                <Card key={product.id} style={{ width:'12rem', margin:'4px' }}>
-                  <Card.Img variant="top" src={product.image} className="ImgProduct"/>
-                  <Card.Body>
-                    <Form.Check
-                      type="checkbox"
-                      label={`${product.name}`}
-                      name="section2"
-                      className="FontCheck"
-                      checked={selectedCharacterSection2 === product}
-                      onChange={() => handleSelectSection2(product)}
-                    />
-                  </Card.Body>
-                  <Card.Footer>
-                    <div className="FontCard">
-                      {product.status === 'Alive' && (<span>🌟 {product.status}</span>)}
-                      {product.status === 'Dead' && (<span>💀 {product.status}</span>)}
-                      {product.status === 'unknown' && (<span>🤔 {product.status}</span>)}
-                    </div>
-                    <div className="FontCard">
-                      {product.species === 'Alien' && (<span>👽 {product.species}</span>)}
-                      {product.species === 'Human' && product.gender === 'Female' && (<span>🚺 {product.species}</span>)}
-                      {product.species === 'Human' && product.gender === 'Male' && (<span>🚹 {product.species}</span>)}
-                      {product.species !== 'Alien' && product.species !== 'Human' && (<span>🚀 {product.species}</span>)}
-                    </div>
-                  </Card.Footer>
-                </Card>
-              ))}
+                {products.map(product => (
+                  <CharacterCard
+                    key={product.id}
+                    character={product}
+                    selectedCharacter={selectedCharacterSection2}
+                    onSelect={handleSelectSection2}
+                  />
+                ))}
               </div>
             </Col>
           </Row>
